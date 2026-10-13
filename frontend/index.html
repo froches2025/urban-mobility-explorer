@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UFT-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How New York Moves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/styles/main.css">
+<script src="https://\cdn.jsdeliver.net/nmp/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="top">
+    <div class="intro">
+        <h1>How New York moves<h1>
+        <p>Yellow taxi trips across the five boroughs: when people ride, where they start, and what each ride costs.</p>
+    </div>
+    <div class="meter" aria-live="polite">
+        <div><span id="m-trips">-</span><small>trips</small></div>
+        <div><span id="m-fare">-</span><small>average fares</small></div>
+        <div><span id="m-dist">-</span><small>average miles</small></div>
+        <div><span id="m-speed">-</span><average mph</small></div>
+    </div>
+</header>
+
+<p id="banner" class="banner" hidden>Backend not reachable, so you are looking at sample data. Start the API and reload to see real trips.</p>
+
+<form id="filters" class="filters">
+    <label>From <input type="date" name="start"></label>
+    <label>To <input type="date" name="end"></label>
+    <label>Hour from <input type="number" name="hour_min" min="0" max="23"></label>
+    <label>Hour to <input type="number" name="hour_max" min="0" max="23"></label>
+    <label>Min miles <input type="number" name="min_distance" min="0" step="0.1"></label>
+    <label>Max miles <input type="number" name="max_distance" min="0" step="0.1"></label>
+    <label>Min fare <input type="number" name="min_fare" min="0" step="0.5"></label>
+    <label>Max fare <input type="number" name="max_fare" min="0" step="0.5"></label>
+    <label>borough
+        <select name="borough">
+            <option value="">All</option><option>Manhattan</option><option>Brooklyn</option>
+            <option>Queens</option><option>Bronx</option><option>Staten Island</option><option>EWR</option>
+        </select>
+    </label>
+    <button type="submit">Apply filters</button>
+    <button type="reset" class="ghost">Reset</button>
+</form>
+
+<main class="grid">
+    <section class="card wide"><h2>When does demand peak?</h2><canvas id="c-hourly"></canvas></section>
+    <section class="card"><h2>Which boroughs start the most trips?</h2><canvas id="c-boroughs"></canvas></section>
+    <section class="card"><h2>Where do the busiest trips begin?</h2><canvas id="c-zones"></canvas></section>
+    <section class="card wide"><h2>Does a longer ride cost proportionally more?</h2><canvas id="c-scatter"></canvas></section>
+    <section class="card wide"><h2>Individual trips</h2><div id="trips"></div></section>
+</main>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
