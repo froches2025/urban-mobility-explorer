@@ -11,7 +11,7 @@ Run AFTER scripts/clean_data.py:
            export DB_URL="mysql+pymysql://user:password@localhost/mobility"
            python seed_db.py
     """
-import os  
+import os Path 
 from pathlib import Path 
 
 import pandas as pd 
