@@ -8,9 +8,9 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--concrete); color: var(--asphalt); font: 400 15px/1.5 "IBM Plex Sans", system-ui, sans-serif; }
-h1, h2, .meter span { font-family: "Barlow Condensend", "Arial Narrow", sans-serif; }
+h1, h2, .meter span { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; }
 
-.top {display: grid; grid-template-columns: repeat(4, 1fr)minmax(0, 1.4fr); gap: 24px; align-items: end; padding: 32px 5vw 24px;}
+.top {display: grid; grid-template-columns: repeat(4, 1fr) minmax(0, 1.4fr); gap: 24px; align-items: end; padding: 32px 5vw 24px;}
 h1 { margin: 0 0 8px; font-size: clamp(38px, 6vw, 64px); line-height: 1; font-weight: 700; }
 .intro p { margin: 0; max-width: 46ch; color: var(--muted); }
 
@@ -24,7 +24,7 @@ h1 { margin: 0 0 8px; font-size: clamp(38px, 6vw, 64px); line-height: 1; font-we
 
 .filters { display: flex; flex-wrap: wrap; gap: 12px; align-items:end; margin: 0 5vw 20px; padding: 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 4px; }
 .filters label { display: grid; gap: 4px; font-size: 13px; color:var(--muted); }
-input, select { width: 110px; padding: 7px 8px; border: 1px solid var(--line); border-radius: 3px; font: inhert; color: var(--asphalt);background: #fff; }
+input, select { width: 110px; padding: 7px 8px; border: 1px solid var(--line); border-radius: 3px; font: inherit; color: var(--asphalt);background: #fff; }
 button { padding: 8px 16px; border: 1px solid var(--asphalt); border-radius: 3px; background: var(--asphalt); color: #fff; font: 500 14px "IBM Plex Sans", sans-serif; cursor: pointer; }
 button.ghost { background: transparent; color: var(--asphalt); }
 button:hover { background: var(--taxi); border-color: var(--taxi); color: var(--asphalt); }

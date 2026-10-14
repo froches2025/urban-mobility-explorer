@@ -49,7 +49,7 @@ async function get(path, filters, extra, sample) {
     return sample(seeded(query));
 }
 
-const ZONES = ["Upper East Side South", "Midtwon Center", "JFK Airport", "Penn Station", "Times Sq/Theatre District", "LaGuardia Aiport", "Upper West Side South", "Murrary Hill"];
+const ZONES = ["Upper East Side South", "Midtown Center", "JFK Airport", "Penn Station", "Times Sq/Theatre District", "LaGuardia Aiport", "Upper West Side South", "Murray Hill"];
 const BOROUGHS = ["Manhattan", "Queens", "Brooklyn", "Bronx", "Staten Island", "EWR"];
 
 export const getSummary = (f) => get("/summary", f, {}, (r) => ({  
@@ -83,7 +83,7 @@ export const getHourly = (f) => get("/hourly", f, {}, (r) =>
         const duration = Math.round(4 + distance * (3 + r() * 3));
         const fare = +(3 + 2.9 * distance + r() * 4).toFixed(2);
         return { 
-            pickup_time: '2019-01-${String(1 + ((page * 7 + i) % 28)).padstart(2, "0")} ${String(Math.floor(r() *24)).padstart(2, "0")}:${string(Math.floor(r() * 60)).padstart(2, "0")}',
+            pickup_time: `2019-01-${String(1 + ((page * 7 + i) % 28)).padStart(2, "0")} ${String(Math.floor(r() *24)).padStart(2, "0")}:${String(Math.floor(r() * 60)).padStart(2, "0")}`,
             pickup_zone: ZONES[Math.floor(r() *ZONES.length)],
             dropoff_zone: ZONES[Math.floor(r() * ZONES.length)],
             distance, duration_min: duration, fare,

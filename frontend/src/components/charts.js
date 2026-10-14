@@ -2,12 +2,12 @@ const INK = "#1b2733";
 const TAXI = "#f7b500";
 const charts = {};
 
-Charts.defaults.font.family = '"IBM Plex Sans", system-ui, sans-serif';
-Charts.defaults.color = "#5b6975";
+Chart.defaults.font.family = '"IBM Plex Sans", system-ui, sans-serif';
+Chart.defaults.color = "#5b6975";
 
 function draw(id, config) { 
     if (charts[id]) charts[id].destroy();
-    charts[id] = new Charts(document.getElementById(id), config);
+    charts[id] = new Chart(document.getElementById(id), config);
 }
 
 const fmt = (n) => Number(n).toLocaleString();
