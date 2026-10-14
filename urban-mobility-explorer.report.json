@@ -1,0 +1,561 @@
+{
+  "reportVersion": "1.0",
+  "assignmentId": "assignment-1792008002169-8mgy1in",
+  "assignmentName": "urban-mobility-explorer",
+  "generatedAt": 1792008123541,
+  "metrics": {
+    "assignmentId": "assignment-1792008002169-8mgy1in",
+    "authorship": {
+      "totalLines": 733,
+      "manualLines": 2,
+      "permittedAILines": 0,
+      "prohibitedAILines": 682,
+      "flaggedAILines": 49,
+      "authorshipPercentage": 99.72714870395635,
+      "prohibitedPercentage": 93.04229195088676
+    },
+    "ownership": {
+      "score": 100,
+      "filesReviewed": 2,
+      "filesUnreviewed": 0,
+      "unreviewedLines": 0,
+      "averageReviewTimeMs": 58829378.5
+    },
+    "violations": [
+      {
+        "type": "agentic-use",
+        "severity": "high",
+        "message": "Agentic AI use detected (files modified by an external agent or AI commit markers)",
+        "details": {
+          "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+          "detectionMethod": "external-file-change",
+          "lines": 293,
+          "tool": "ai"
+        },
+        "firstDetectedAt": 1791929765296,
+        "lastDetectedAt": 1792003049361,
+        "count": 7
+      },
+      {
+        "type": "unreviewed-large-paste",
+        "severity": "medium",
+        "message": "Large paste accepted after only 0ms (minimum 5000ms)",
+        "details": {
+          "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+          "reviewTimeMs": 0,
+          "lines": 49,
+          "characters": 1727
+        },
+        "firstDetectedAt": 1791930665551,
+        "lastDetectedAt": 1791930665551,
+        "count": 1
+      },
+      {
+        "type": "authorship-exceeded",
+        "severity": "medium",
+        "message": "AI authorship 99.7% exceeds limit of 20%",
+        "details": {
+          "actualPercentage": 99.72714870395635,
+          "maxAllowedPercentage": 20,
+          "aiLines": 731
+        },
+        "firstDetectedAt": 1792003049361,
+        "lastDetectedAt": 1792003049361,
+        "count": 1
+      },
+      {
+        "type": "tracking-gap",
+        "severity": "low",
+        "message": "No tracking activity for 64684 seconds during assignment window",
+        "details": {
+          "startTime": 1791930665551,
+          "endTime": 1791995350313,
+          "durationSeconds": 64684
+        },
+        "firstDetectedAt": 1791995350313,
+        "lastDetectedAt": 1792008123540,
+        "count": 4
+      }
+    ],
+    "rawEvents": [
+      {
+        "id": 1288,
+        "timestamp": 1791929486319,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 0,
+        "charactersCount": 1,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/seed_db.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 2000
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 1289,
+        "timestamp": 1791929765296,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 293,
+        "linesRemoved": 0,
+        "linesChanged": 293,
+        "charactersCount": 12179,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "language": "python",
+        "metadata": {
+          "source": "external-file-change",
+          "detectionMethod": "external-file-change",
+          "confidence": "high",
+          "isAgentMode": true,
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": true,
+        "agentSessionId": "agent-session-1791929765296-5bj7en7du",
+        "source": "ai",
+        "detectionMethod": "external-file-change",
+        "confidence": "high"
+      },
+      {
+        "id": 1290,
+        "timestamp": 1791930665544,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 293,
+        "linesRemoved": 0,
+        "linesChanged": 293,
+        "charactersCount": 12179,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "language": "python",
+        "metadata": {
+          "source": "external-file-change",
+          "detectionMethod": "external-file-change",
+          "confidence": "high",
+          "isAgentMode": true,
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": true,
+        "agentSessionId": "agent-session-1791930665545-mgpxgb4yo",
+        "source": "ai",
+        "detectionMethod": "external-file-change",
+        "confidence": "high"
+      },
+      {
+        "id": 1291,
+        "timestamp": 1791930665551,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 49,
+        "linesRemoved": 0,
+        "linesChanged": 49,
+        "charactersCount": 1727,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "language": "python",
+        "metadata": {
+          "detectionMethod": "large-paste",
+          "confidence": "high",
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "ai",
+        "detectionMethod": "large-paste",
+        "confidence": "high"
+      },
+      {
+        "id": 1292,
+        "timestamp": 1791995350313,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 9,
+        "linesRemoved": 9,
+        "linesChanged": 18,
+        "charactersCount": 12004,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "language": "python",
+        "metadata": {
+          "source": "external-file-change",
+          "detectionMethod": "external-file-change",
+          "confidence": "high",
+          "isAgentMode": true,
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": true,
+        "source": "ai",
+        "detectionMethod": "external-file-change",
+        "confidence": "high"
+      },
+      {
+        "id": 1293,
+        "timestamp": 1791995684933,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 9,
+        "linesRemoved": 9,
+        "linesChanged": 18,
+        "charactersCount": 12008,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "language": "python",
+        "metadata": {
+          "source": "external-file-change",
+          "detectionMethod": "external-file-change",
+          "confidence": "high",
+          "isAgentMode": true,
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": true,
+        "source": "ai",
+        "detectionMethod": "external-file-change",
+        "confidence": "high"
+      },
+      {
+        "id": 1294,
+        "timestamp": 1791995832795,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 11,
+        "linesRemoved": 11,
+        "linesChanged": 22,
+        "charactersCount": 12008,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "language": "python",
+        "metadata": {
+          "source": "external-file-change",
+          "detectionMethod": "external-file-change",
+          "confidence": "high",
+          "isAgentMode": true,
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": true,
+        "source": "ai",
+        "detectionMethod": "external-file-change",
+        "confidence": "high"
+      },
+      {
+        "id": 1295,
+        "timestamp": 1791999619814,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 11,
+        "linesRemoved": 11,
+        "linesChanged": 22,
+        "charactersCount": 12008,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "language": "python",
+        "metadata": {
+          "source": "external-file-change",
+          "detectionMethod": "external-file-change",
+          "confidence": "high",
+          "isAgentMode": true,
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": true,
+        "source": "ai",
+        "detectionMethod": "external-file-change",
+        "confidence": "high"
+      },
+      {
+        "id": 1296,
+        "timestamp": 1792002162421,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 0,
+        "charactersCount": 2,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/seed_db.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 4242
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 1297,
+        "timestamp": 1792002168169,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 0,
+        "charactersCount": 2,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/seed_db.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 4311
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 1298,
+        "timestamp": 1792003027222,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 1,
+        "charactersCount": 7,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/seed_db.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 5717
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 1299,
+        "timestamp": 1792003043974,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 1,
+        "charactersCount": 1,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/seed_db.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 2000
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 1300,
+        "timestamp": 1792003049361,
+        "tool": "ai",
+        "eventType": "code-generated",
+        "linesOfCode": 8,
+        "linesRemoved": 8,
+        "linesChanged": 16,
+        "charactersCount": 2408,
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/seed_db.py",
+        "language": "python",
+        "metadata": {
+          "source": "external-file-change",
+          "detectionMethod": "external-file-change",
+          "confidence": "high",
+          "isAgentMode": true,
+          "isAgentGenerated": true
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": true,
+        "source": "ai",
+        "detectionMethod": "external-file-change",
+        "confidence": "high"
+      }
+    ],
+    "fileReviews": [
+      {
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/seed_db.py",
+        "date": "2026-10-14",
+        "tool": "ai",
+        "reviewQuality": "thorough",
+        "reviewScore": 100,
+        "isReviewed": true,
+        "linesGenerated": 8,
+        "linesChanged": 16,
+        "linesSinceReview": 0,
+        "linesAdded": 8,
+        "linesRemoved": 8,
+        "charactersCount": 2408,
+        "agentSessionId": "manual-session",
+        "isAgentGenerated": true,
+        "wasFileOpen": false,
+        "firstGeneratedAt": 1792003049361,
+        "lastReviewedAt": 1792008118691,
+        "totalReviewTime": 1387754,
+        "language": "python",
+        "modificationCount": 1,
+        "totalTimeInFocus": 4933812,
+        "scrollEventCount": 0,
+        "cursorMovementCount": 0,
+        "editsMade": false,
+        "lastOpenedAt": 1792007138579,
+        "reviewSessionsCount": 0,
+        "reviewedInTerminal": false
+      },
+      {
+        "filePath": "/home/annyk/urban-mobility-explorer/data-pipeline/scripts/clean_data.py",
+        "date": "2026-10-14",
+        "tool": "ai",
+        "reviewQuality": "thorough",
+        "reviewScore": 100,
+        "isReviewed": true,
+        "linesGenerated": 675,
+        "linesChanged": 715,
+        "linesSinceReview": 0,
+        "linesAdded": 11,
+        "linesRemoved": 11,
+        "charactersCount": 74113,
+        "agentSessionId": "manual-session",
+        "isAgentGenerated": true,
+        "wasFileOpen": false,
+        "firstGeneratedAt": 1791929765296,
+        "totalReviewTime": 116271003,
+        "language": "python",
+        "modificationCount": 7,
+        "totalTimeInFocus": 120707321,
+        "scrollEventCount": 0,
+        "cursorMovementCount": 0,
+        "editsMade": false,
+        "lastOpenedAt": 1791992564580,
+        "reviewSessionsCount": 0,
+        "reviewedInTerminal": false
+      }
+    ],
+    "trackingGaps": [
+      {
+        "startTime": 1791930665551,
+        "endTime": 1791995350313,
+        "durationSeconds": 64684
+      },
+      {
+        "startTime": 1791995832795,
+        "endTime": 1791999619814,
+        "durationSeconds": 3787
+      },
+      {
+        "startTime": 1791999619814,
+        "endTime": 1792002162421,
+        "durationSeconds": 2542
+      },
+      {
+        "startTime": 1792003049361,
+        "endTime": 1792008123540,
+        "durationSeconds": 5074
+      }
+    ]
+  },
+  "policy": {
+    "maxAuthorshipPercentage": 20,
+    "minOwnershipScore": 80,
+    "exemptFileGlobs": [
+      "**/README*",
+      "**/*.md",
+      "**/package.json",
+      "**/package-lock.json",
+      "**/npm-shrinkwrap.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/poetry.lock",
+      "**/Pipfile.lock",
+      "**/Gemfile.lock",
+      "**/Cargo.lock",
+      "**/composer.lock",
+      "**/go.sum",
+      "**/.gitignore",
+      "**/LICENSE*",
+      "**/tsconfig.json",
+      "**/.eslintrc*",
+      "**/.prettierrc*",
+      "**/node_modules/**",
+      "**/bower_components/**",
+      "**/.npm/**",
+      "**/venv/**",
+      "**/.venv/**",
+      "**/env/**",
+      "**/__pycache__/**",
+      "**/.tox/**",
+      "**/.mypy_cache/**",
+      "**/.pytest_cache/**",
+      "**/.ruff_cache/**",
+      "**/site-packages/**",
+      "**/.git/**",
+      "**/.hg/**",
+      "**/.svn/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/out/**",
+      "**/coverage/**",
+      "**/.nyc_output/**",
+      "**/.next/**",
+      "**/.nuxt/**",
+      "**/target/**",
+      "**/vendor/**",
+      "**/.idea/**",
+      "**/.vs/**",
+      "**/*.pyc",
+      "**/*.pyo",
+      "**/*.min.js",
+      "**/*.bundle.js",
+      "**/*.map",
+      "**/package-lock.json",
+      "**/npm-shrinkwrap.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/poetry.lock",
+      "**/Pipfile.lock",
+      "**/Gemfile.lock",
+      "**/Cargo.lock",
+      "**/composer.lock",
+      "**/go.sum"
+    ],
+    "prohibitedMethods": [
+      "external-file-change",
+      "git-commit-marker"
+    ],
+    "permittedMethods": [
+      "inline-completion-api"
+    ],
+    "flaggedMethods": [
+      "large-paste",
+      "change-velocity"
+    ],
+    "minLargePasteReviewTimeMs": 5000,
+    "maxTrackingGapSeconds": 1800
+  },
+  "exclusionAudit": [
+    {
+      "id": 1,
+      "timestamp": 1792008002187,
+      "globs": [],
+      "source": "assignment-activated"
+    }
+  ],
+  "studentIdentifier": "a.kemasuode@alustudent.com",
+  "repoHeadCommit": "8321ff442bba2692816a64d7e3e03706ca7cea33",
+  "integrity": {
+    "algorithm": "sha256",
+    "hash": "42e041cc0620fc02a7ee376f0a96073170742f882c98307023cf2f45ca004a28"
+  }
+}
