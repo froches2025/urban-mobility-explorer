@@ -20,11 +20,11 @@ if your files use other names, edit COLUMN_ALIASES below. The script prints
 the columns it found if something required is missing.
 """
 import json
-from pathlib import path
+from pathlib import Path
 
 import pandas as pd
 
-BASE_DIR = path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 RAW_DIR = BASE_DIR / "raw_data"
 OUT_DIR =BASE_DIR / "clean_data"
 ZONES_FILE = RAW_DIR / "taxi_zone_lookup.csv"
@@ -170,10 +170,10 @@ def load_zone_geometry():
             "zone_id": int(float(zone_id)),
             "centroid_lat": None if lat is None else round(lat, 6),
             "centroid_lon": None if lon is None else round(lon, 6),
-            "boundary_geojson": json.dumps(geometry, separates=(",", ":")),
+            "boundary_geojson": json.dumps(geometry, separators=(",", ":")),
         })
     if projected:
-        log("WARNING: GeoJSON coordinates are not latitude/longitude (projected);"
+        log("WARNING: GeoJSON coordinates are not latitude/longitude (projected); ",
             "centroids left empty. Re-download the WGS84 version if you need them.")
     geo = pd.DataFrame(rows, columns=columns).drop_duplicates(subset="zone_id")
     log(f"Loaded boundaries for {len(geo)}zones from {files[0].name}")
@@ -186,16 +186,16 @@ def load_zones():
       zones = zones.rename(columns={"locationid": "zone_id", "zone": "zone_name"})
       zones["borough"] = zones["borough"].fillna("UnKnown")
       zones["zone_name"] = zones["zone_name"].fillna("UnKnown")
-      zones["service_zone"] = zones["service-zone"].fillna("Unknown")
+      zones["service-zone"] = zones["service-zone"].fillna("Unknown")
       zones = zones.drop_duplicates(subset="zone_id")
 
       boroughs = (
           pd.DataFrame({"borough_name": sorted(zones["borough"].unique())})
           .reset_index(drop=True)
       )
-      borough["borough_id"] = borough.index + 1
+      boroughs["borough_id"] = boroughs.index + 1
       zones = zones.merge(
-          borough, left_on="borough", right_on="borough_name", how="left"
+          boroughs, left_on="borough", right_on="borough_name", how="left"
       )
       zones = zones.merge(load_zone_geometry(), on="zone_id", how="left")
       zones = zones[["zone_id", "zone_name", "service_zone", "borough_id",
@@ -214,14 +214,14 @@ def clean_trips(df, valid_zone_ids):
 
         #2. missing values in essential fields
         essential = REQUIRED
-        df = drop_rows(df, df[essentail]. notna().all(axis=1),
+        df = drop_rows(df, df[essential]. notna().all(axis=1),
                        "Missing value in an essential column")
 
         #3. duplicates
         df = drop_rows(df, ~df.duplicated(), "Exact duplicate rows")
 
         #4. pickups outside the month(s) the file is supposed to cover
-        months = df["pickup_datetime"].dt,to_period("M").astype(str)
+        months = df["pickup_datetime"].dt.to_period("M").astype(str)
         expected = EXPECTED_MONTHS or [months.mode()[0]]
         log(f"Keeping pickups in: {', '.join(expected)}")
         df = drop_rows(df, months.isin(expected),
@@ -261,10 +261,10 @@ def clean_trips(df, valid_zone_ids):
 
         #11. final types and trip_id
         df["pickup_zone_id"] = df["pickup_zone_id"].astype(int)
-        df["dropoff_zone_"] = df["dropoff_zone_id"].astype(int)
+        df["dropoff_zone_id"] = df["dropoff_zone_id"].astype(int)
         df["passenger_count"] = df["passenger_count"].astype("Int64")
         df = df.sort_values("pickup_datetime").reset_index(drop=True)
-        df.inser(0, "trip_id", df.index + 1)
+        df.insert(0, "trip_id", df.index + 1)
         return df
 
 

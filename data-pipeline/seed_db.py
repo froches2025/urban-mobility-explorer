@@ -12,17 +12,17 @@ Run AFTER scripts/clean_data.py:
            python seed_db.py
     """
 import os  
-    from pathlib import Path
+from pathlib import Path 
 
-    import pandas as pd 
-    from sqlalchemy import create_engine, text
+import pandas as pd 
+from sqlalchemy import create_engine, text
 
-    BASE_DIR = Path(__file__).resolve(). parent
-    CLEAN_DIR = BASE_DIR / "clean_data"
-    SCHEMA_FILE = BASE_DIR / "schema.sql"
-    DB_URL = os.environ.get("DB_URL", f"sqlite:///{BASE_DIR / 'mobility.db'}")
+BASE_DIR = Path(__file__).resolve(). parent
+CLEAN_DIR = BASE_DIR / "clean_data"
+SCHEMA_FILE = BASE_DIR / "schema.sql"
+DB_URL = os.environ.get("DB_URL", f"sqlite:///{BASE_DIR / 'mobility.db'}")
 
-    CHUNK_SIZE = 50_000
+CHUNK_SIZE = 50_000
 
 
     def run_schema(engine):
