@@ -2,7 +2,7 @@
 This repository contains an enterprise-level full-stack application designed to analyze and visualize the New York City Taxi Trip dataset. The system processes raw transit data, stores it in a normalized relational database, and serves it through a backend API to an interactive frontend dashboard.
 
 ### Team Task Sheet
-https://placeholder.com
+[https://docs.google.com/spreadsheets/d/1JR4F3T7Er_94yCupQfcRhtoRWShdTGLvrSVvKbx0MW8/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1JR4F3T7Er_94yCupQfcRhtoRWShdTGLvrSVvKbx0MW8/edit?usp=sharing)
 
 ### Demo Video
 https://youtube.com/placeholder
