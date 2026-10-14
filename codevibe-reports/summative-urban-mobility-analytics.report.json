@@ -1,0 +1,275 @@
+{
+  "reportVersion": "1.0",
+  "assignmentId": "assignment-1792015706503-7nzdn4h",
+  "assignmentName": "Summative - Urban Mobility Analytics",
+  "generatedAt": 1792015837529,
+  "metrics": {
+    "assignmentId": "assignment-1792015706503-7nzdn4h",
+    "authorship": {
+      "totalLines": 5,
+      "manualLines": 5,
+      "permittedAILines": 0,
+      "prohibitedAILines": 0,
+      "flaggedAILines": 0,
+      "authorshipPercentage": 0,
+      "prohibitedPercentage": 0
+    },
+    "ownership": {
+      "score": 0,
+      "filesReviewed": 0,
+      "filesUnreviewed": 0,
+      "unreviewedLines": 0,
+      "averageReviewTimeMs": 0
+    },
+    "violations": [
+      {
+        "type": "tracking-gap",
+        "severity": "low",
+        "message": "No tracking activity for 593688 seconds during assignment window",
+        "details": {
+          "startTime": 1791410400000,
+          "endTime": 1792004088013,
+          "durationSeconds": 593688
+        },
+        "firstDetectedAt": 1792004088013,
+        "lastDetectedAt": 1792004088013,
+        "count": 1
+      }
+    ],
+    "rawEvents": [
+      {
+        "id": 4,
+        "timestamp": 1792004088013,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 1,
+        "charactersCount": 1,
+        "filePath": "/home/froches/e-w-d_projects/urban-mobility-explorer/backend/main.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 2001
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 5,
+        "timestamp": 1792004342472,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 1,
+        "charactersCount": 23,
+        "filePath": "/home/froches/e-w-d_projects/urban-mobility-explorer/backend/main.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 9869
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 6,
+        "timestamp": 1792004381212,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 2,
+        "charactersCount": 4,
+        "filePath": "/home/froches/e-w-d_projects/urban-mobility-explorer/backend/main.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 4710
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      },
+      {
+        "id": 7,
+        "timestamp": 1792004546556,
+        "tool": "claude-code",
+        "eventType": "code-generated",
+        "linesOfCode": 1,
+        "charactersCount": 6,
+        "filePath": "/home/froches/e-w-d_projects/urban-mobility-explorer/backend/spatial_utils.py",
+        "language": "python",
+        "metadata": {
+          "manual": true,
+          "source": "manual-typing",
+          "duration": 6978
+        },
+        "reviewQuality": null,
+        "isReviewed": false,
+        "isAgentMode": false,
+        "source": "manual",
+        "detectionMethod": "manual-typing",
+        "confidence": "high"
+      }
+    ],
+    "fileReviews": [
+      {
+        "filePath": "/home/froches/e-w-d_projects/urban-mobility-explorer/backend/spatial_utils.py",
+        "date": "2026-10-14",
+        "tool": "ai",
+        "reviewQuality": "thorough",
+        "reviewScore": 100,
+        "isReviewed": true,
+        "linesGenerated": 105,
+        "linesChanged": 105,
+        "linesSinceReview": 0,
+        "linesAdded": 57,
+        "linesRemoved": 0,
+        "charactersCount": 3760,
+        "agentSessionId": "agent-session-1792014412032-ybavl205f",
+        "isAgentGenerated": true,
+        "wasFileOpen": false,
+        "firstGeneratedAt": 1792012114709,
+        "lastReviewedAt": 1792015193541,
+        "totalReviewTime": 34726,
+        "language": "python",
+        "modificationCount": 4,
+        "totalTimeInFocus": 34726,
+        "scrollEventCount": 107,
+        "cursorMovementCount": 2,
+        "editsMade": false,
+        "lastOpenedAt": 1792014945156,
+        "reviewSessionsCount": 0,
+        "reviewedInTerminal": false
+      }
+    ],
+    "trackingGaps": [
+      {
+        "startTime": 1791410400000,
+        "endTime": 1792004088013,
+        "durationSeconds": 593688
+      }
+    ]
+  },
+  "policy": {
+    "maxAuthorshipPercentage": 20,
+    "minOwnershipScore": 100,
+    "exemptFileGlobs": [
+      "**/README*",
+      "**/*.md",
+      "**/package.json",
+      "**/package-lock.json",
+      "**/npm-shrinkwrap.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/poetry.lock",
+      "**/Pipfile.lock",
+      "**/Gemfile.lock",
+      "**/Cargo.lock",
+      "**/composer.lock",
+      "**/go.sum",
+      "**/.gitignore",
+      "**/LICENSE*",
+      "**/tsconfig.json",
+      "**/.eslintrc*",
+      "**/.prettierrc*",
+      "**/node_modules/**",
+      "**/bower_components/**",
+      "**/.npm/**",
+      "**/venv/**",
+      "**/.venv/**",
+      "**/env/**",
+      "**/__pycache__/**",
+      "**/.tox/**",
+      "**/.mypy_cache/**",
+      "**/.pytest_cache/**",
+      "**/.ruff_cache/**",
+      "**/site-packages/**",
+      "**/.git/**",
+      "**/.hg/**",
+      "**/.svn/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/out/**",
+      "**/coverage/**",
+      "**/.nyc_output/**",
+      "**/.next/**",
+      "**/.nuxt/**",
+      "**/target/**",
+      "**/vendor/**",
+      "**/.idea/**",
+      "**/.vs/**",
+      "**/*.pyc",
+      "**/*.pyo",
+      "**/*.min.js",
+      "**/*.bundle.js",
+      "**/*.map",
+      "**/package-lock.json",
+      "**/npm-shrinkwrap.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/poetry.lock",
+      "**/Pipfile.lock",
+      "**/Gemfile.lock",
+      "**/Cargo.lock",
+      "**/composer.lock",
+      "**/go.sum"
+    ],
+    "prohibitedMethods": [
+      "external-file-change",
+      "git-commit-marker"
+    ],
+    "permittedMethods": [
+      "inline-completion-api"
+    ],
+    "flaggedMethods": [
+      "large-paste",
+      "change-velocity"
+    ],
+    "minLargePasteReviewTimeMs": 5000,
+    "maxTrackingGapSeconds": 1800
+  },
+  "exclusionAudit": [
+    {
+      "id": 1,
+      "timestamp": 1792000331076,
+      "globs": [],
+      "source": "assignment-activated"
+    },
+    {
+      "id": 2,
+      "timestamp": 1792002922188,
+      "globs": [],
+      "source": "assignment-deactivated"
+    },
+    {
+      "id": 3,
+      "timestamp": 1792011783424,
+      "globs": [],
+      "source": "assignment-activated"
+    },
+    {
+      "id": 4,
+      "timestamp": 1792015706517,
+      "globs": [],
+      "source": "assignment-activated"
+    }
+  ],
+  "studentIdentifier": "f.michael@alustudent.com",
+  "repoUrl": "https://github.com/froches2025/urban-mobility-explorer",
+  "repoHeadCommit": "07d948078e77dad56ecdbdb118efd0a3d1badc49",
+  "integrity": {
+    "algorithm": "sha256",
+    "hash": "1d218dd637231bc4c9c5d783105b527fdfdb930b11a88260117d0c6e997699ad"
+  }
+}
