@@ -18,17 +18,17 @@ export function renderHourly(data) {
         type: "bar",
         data: {
             labels: data.map((d) => `${String(d.hour).padStart(2, "0")}:00`),
-            datasets: [{ data: data.map((d) => d.trips), backgroundColor: data.map((d) => (d.trips === peak ? TAXI : INK)) }],
+            datasets: [{ label: "Trips", data: data.map((d) => d.trips), backgroundColor: data.map((d) => (d.trips === peak ? TAXI : INK)) }],
         },
-        options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => '${fmt(c.raw)} trips' } } }, scale: { y: { beginAtZero: true } } },
+        options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${fmt(c.raw)} trips` } } }, scales: { y: { beginAtZero: true } } },
      });
 }
 
 function horizontal(id, labels, values) {
     draw(id, { 
         type: "bar",
-        data: { labels, datasets: [{ data: values, backgroundColor: values.map((v) => (v === Math.max(...values) ? TAXI : INK)) }] },
-        Options: { indexAxis: "y", plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => '${fmt(c.raw)} trips' } } } },
+        data: { labels, datasets: [{ Label: "Trips", data: values, backgroundColor: values.map((v) => (v === Math.max(...values) ? TAXI : INK)) }] },
+        options: { indexAxis: "y", plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${fmt(c.raw)} trips` } } } },
     });
 }
 
