@@ -27,7 +27,7 @@ export function renderHourly(data) {
 function horizontal(id, labels, values) {
     draw(id, { 
         type: "bar",
-        data: { labels, datasets: [{ Label: "Trips", data: values, backgroundColor: values.map((v) => (v === Math.max(...values) ? TAXI : INK)) }] },
+        data: { labels, datasets: [{ label: "Trips", data: values, backgroundColor: values.map((v) => (v === Math.max(...values) ? TAXI : INK)) }] },
         options: { indexAxis: "y", plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${fmt(c.raw)} trips` } } } },
     });
 }
@@ -40,7 +40,7 @@ export function renderScatter(data) {
         type: "scatter",
         data: { datasets: [{ data: data.map((d) => ({ x: d.distance, y: d.fare })), backgroundColor: "rgba(27,39,51,0.45)", pointRadius: 3 }] },
         options: { 
-            plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => '${c.raw.x} mi, $${c.raw.y}' } } },
+            plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${c.raw.x} mi, $${c.raw.y}` } } },
             scales: { x: { title: { display: true, text: "Distance (miles)" } }, y: { title: { display: true, text: "Fare ($)" }, beginAtZero: true } },
         },
     });

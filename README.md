@@ -5,7 +5,7 @@ This repository contains an enterprise-level full-stack application designed to 
 [https://docs.google.com/spreadsheets/d/1JR4F3T7Er_94yCupQfcRhtoRWShdTGLvrSVvKbx0MW8/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1JR4F3T7Er_94yCupQfcRhtoRWShdTGLvrSVvKbx0MW8/edit?usp=sharing)
 
 ### Demo Video
-https://youtube.com/placeholder
+[https://www.loom.com/share/29bc771faa554e1a9f75cfc580ea5927](https://www.loom.com/share/29bc771faa554e1a9f75cfc580ea5927)
 
 ## System Architecture
 The application is built with a clear separation of concerns, utilizing a three-tier architecture:
@@ -70,13 +70,14 @@ python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 # Install requirements
-pip install flask flask-cors
+pip install -r ../requirements.txt
 
 # Run the API server
 python main.py
 ```
 
-The backend will run on [http://127.0.0.1:5000](http://127.0.0.1:5000).
+The backend reads `data-pipeline/mobility.db` by default and runs on
+[http://127.0.0.1:5000](http://127.0.0.1:5000).
 
 3. **Frontend Dashboard Launch**
 Because the frontend uses vanilla HTML/JS, you can serve it using a simple local server to avoid CORS issues.
@@ -87,6 +88,10 @@ python -m http.server 8080
 ```
 
 Open your browser and navigate to http://localhost:8080 to interact with the dashboard.
+
+The dashboard uses the real API and reports a visible error if the backend or
+database is unavailable; it does not silently replace failed requests with
+sample trip data.
 
 ## API Reference & Algorithmic Features
 **Custom Data Structure/Algorithm (DSA):**

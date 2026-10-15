@@ -37,16 +37,11 @@ function seeded(text) {
 
 async function get(path, filters, extra, sample) {
     const query = toQuery(filters, extra);
-    if (!mock) {
-        try { 
-            const res = await fetch(`${BASE}${path}?${query}`);
-            if (!res.ok) throw new Error(res.status);
-            return await res.json();
-        } catch { 
-            mock = true;
-        }
+    const res = await fetch(`${BASE}${path}?${query}`);
+    if (!res.ok) {
+        throw new Error(`API ${path} returned HTTP ${res.status}`);
     }
-    return sample(seeded(query));
+    return await res.json();
 }
 
 const ZONES = ["Upper East Side South", "Midtown Center", "JFK Airport", "Penn Station", "Times Sq/Theatre District", "LaGuardia Aiport", "Upper West Side South", "Murray Hill"];
@@ -77,7 +72,7 @@ export const getHourly = (f) => get("/hourly", f, {}, (r) =>
         return { distance, fare: +(3 + 2.9 * distance + (r() - 0.5) * 8).toFixed(2) };
     }));
 
-    export const getTrips = (f, { sort, order, page, limit }) => get("/trips", f, { sort, order, page, limit }, (r) => {
+    export const getTrips = (f, { sort, order, page, limit } = {}) => get("/trips", f, { sort, order, page, limit }, (r) => {
     const rows = Array.from({ length: limit }, (_, i) => { 
         const distance = +(0.4 + r() * 10).toFixed(1);
         const duration = Math.round(4 + distance * (3 + r() * 3));

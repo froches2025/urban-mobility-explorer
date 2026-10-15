@@ -1,0 +1,15 @@
+WARNING: no taxi_zones GeoJSON found in raw_data/, zone boundaries skipped
+Loaded 7,696,617 raw rows from yellow_tripdata_2019-01.parquet
+-Missing value in an essential column: removed 0row
+-Exact duplicate rows: removed 0row
+Keeping pickups in: 2019-01
+-Pickup date outside the expected month(s): removed 537row
+-Duration not between 1 and 180 minutes: removed 95,201row
+-Distance not between 0 and 100 miles: removed 11,545row
+-Fare outside $2.5-$500: removed 5,466row
+-pickup/dropoff zone not in zone lookup: removed 0row
+- passenger count outside 1-6: set to missing for 114,772 rows (rows kept)
+-Average speed above 80 mph: removed 440row
+
+Final clean rows: 7,583,428
+Derived features: trip_duration_min, avg_speed_mph, cost_per_minute

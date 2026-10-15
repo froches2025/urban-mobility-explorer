@@ -18,21 +18,26 @@ async function loadTable() {
 }
 
 async function loadAll() { 
-    const f = readFilters();
-    const [summary, hourly, boroughs, zones, scatter] = await Promise.all([
-        getSummary(f), getHourly(f), getBoroughs(f), getTopZones(f), getFareDistance(f),
-    ]);
-    set( "m-trips", summary.trips.toLocaleString());
-    set("m-fare", `$${summary.avg_fare.toFixed(2)}`); 
-    set("m-dist", summary.avg_distance.toFixed(1));
-    set("m-speed", summary.avg_speed.toFixed(1));
-    renderHourly(hourly);
-    renderBoroughs(boroughs);
-    renderZones(zones);
-    renderScatter(scatter);
-    tableState.page =1;
-    await loadTable();
-    document.getElementById("banner").hidden = !isMock();
+    try {
+        const f = readFilters();
+        const [summary, hourly, boroughs, zones, scatter] = await Promise.all([
+            getSummary(f), getHourly(f), getBoroughs(f), getTopZones(f), getFareDistance(f),
+        ]);
+        set("m-trips", summary.trips.toLocaleString());
+        set("m-fare", `$${summary.avg_fare.toFixed(2)}`);
+        set("m-dist", summary.avg_distance.toFixed(1));
+        set("m-speed", summary.avg_speed.toFixed(1));
+        renderHourly(hourly);
+        renderBoroughs(boroughs);
+        renderZones(zones);
+        renderScatter(scatter);
+        tableState.page = 1;
+        await loadTable();
+        document.getElementById("banner").hidden = !isMock();
+    } catch (error) {
+        document.getElementById("banner").hidden = false;
+        document.getElementById("banner").textContent = `Unable to load dashboard data: ${error.message}`;
+    }
 }
 
 form.addEventListener("submit", (e) => { e.preventDefault(); loadAll(); });

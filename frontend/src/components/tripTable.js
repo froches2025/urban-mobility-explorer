@@ -11,6 +11,13 @@
 
  export const PAGE_SIZE = 10;
 
+ const escapeHtml = (value) => String(value ?? "")
+     .replaceAll("&", "&amp;")
+     .replaceAll("<", "&lt;")
+     .replaceAll(">", "&gt;")
+     .replaceAll('"', "&quot;")
+     .replaceAll("'", "&#039;");
+
  // state = { sort, order, page }; onChange(state) is called when the user sorts or pages.
  export function renderTable(container, data, state, onChange) {
     const pages = Math.max(1, Math.ceil(data.total / PAGE_SIZE));
@@ -20,7 +27,7 @@
         return `<th data-key="${key}" tabindex="0"${active ? ` aria-sort="${state.order === "asc" ? "ascending" : "descending"}"` : ""}>${label}${arrow}</th>`;
     }).join("");
     const body = data.rows
-      .map((r) => `<tr>${COLUMNS.map(([key]) => `<td>${r[key]}</td>`).join("")}</tr>`)
+      .map((r) => `<tr>${COLUMNS.map(([key]) => `<td>${escapeHtml(r[key])}</td>`).join("")}</tr>`)
       .join("");
 
       container.innerHTML = `

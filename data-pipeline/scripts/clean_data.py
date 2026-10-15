@@ -75,7 +75,7 @@ def drop_rows(df, keep_mask, reason):
 
 def load_trips():
     parquet_files = sorted(RAW_DIR.glob("*.parquet"))
-    csv_files = sorted(p for p in RAW_DIR.glob("*.csv") if p != ZONES_file)
+    csv_files = sorted(p for p in RAW_DIR.glob("*.csv") if p != ZONES_FILE)
     if parquet_files:
         frames = [pd.read_parquet(p) for p in parquet_files]
         source = [p.name for p in parquet_files]
@@ -84,7 +84,7 @@ def load_trips():
         wanted = set(COLUMN_ALIASES) | set(REQUIRED) | set(OPTIONAL)
         frames = [pd.read_csv(p, usecols=lambda c: c.strip().lower() in wanted)
                   for p in csv_files]
-        sources = [p.name for p in csv_files]
+        source = [p.name for p in csv_files]
     else:
         raise SystemExit(f"No trip files found in {RAW_DIR}")
     # avoid copying a huge table when there is only one file
@@ -128,9 +128,9 @@ def ring_centroid(ring):
 
 def geometry_centroid(geometry):
     """Centroid (1on, 1at) of a GeoJSON Polygon or Multipolygon (outer rings only)."""
-    if geometry["type"] == "polygon":
+    if geometry["type"] == "Polygon":
         polygons = [geometry["coordinates"]]
-    elif geometry["type"] == "Multipolygon":
+    elif geometry["type"] == "MultiPolygon":
         polygons = geometry["coordinates"]
     else:
         return None, None
@@ -173,7 +173,7 @@ def load_zone_geometry():
             "boundary_geojson": json.dumps(geometry, separators=(",", ":")),
         })
     if projected:
-        log("WARNING: GeoJSON coordinates are not latitude/longitude (projected); ",
+        log("WARNING: GeoJSON coordinates are not latitude/longitude (projected); "
             "centroids left empty. Re-download the WGS84 version if you need them.")
     geo = pd.DataFrame(rows, columns=columns).drop_duplicates(subset="zone_id")
     log(f"Loaded boundaries for {len(geo)}zones from {files[0].name}")
@@ -186,7 +186,7 @@ def load_zones():
       zones = zones.rename(columns={"locationid": "zone_id", "zone": "zone_name"})
       zones["borough"] = zones["borough"].fillna("UnKnown")
       zones["zone_name"] = zones["zone_name"].fillna("UnKnown")
-      zones["service-zone"] = zones["service-zone"].fillna("Unknown")
+      zones["service_zone"] = zones["service_zone"].fillna("Unknown")
       zones = zones.drop_duplicates(subset="zone_id")
 
       boroughs = (
@@ -212,60 +212,64 @@ def clean_trips(df, valid_zone_ids):
                 "fare_amount", "passenger_count", "tip_amount", "total_amount"]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
-        #2. missing values in essential fields
-        essential = REQUIRED
-        df = drop_rows(df, df[essential]. notna().all(axis=1),
-                       "Missing value in an essential column")
+    #2. missing values in essential fields
+    essential = REQUIRED
+    df = drop_rows(df, df[essential].notna().all(axis=1),
+                   "Missing value in an essential column")
 
-        #3. duplicates
-        df = drop_rows(df, ~df.duplicated(), "Exact duplicate rows")
+    #3. duplicates
+    df = drop_rows(df, ~df.duplicated(), "Exact duplicate rows")
 
-        #4. pickups outside the month(s) the file is supposed to cover
-        months = df["pickup_datetime"].dt.to_period("M").astype(str)
-        expected = EXPECTED_MONTHS or [months.mode()[0]]
-        log(f"Keeping pickups in: {', '.join(expected)}")
-        df = drop_rows(df, months.isin(expected),
-                       "Pickup date outside the expected month(s)")
+    #4. pickups outside the month(s) the file is supposed to cover
+    months = df["pickup_datetime"].dt.to_period("M").astype(str)
+    expected = EXPECTED_MONTHS or ([months.mode()[0]] if not months.dropna().empty else [])
+    log(f"Keeping pickups in: {', '.join(expected)}")
+    df = drop_rows(df, months.isin(expected),
+                   "Pickup date outside the expected month(s)")
 
-        #5. invalid time ranges
-        duration = (df["dropoff_datetime"] - df["pickup_datetime"]).dt.total_seconds() / 60
-        df = drop_rows(df, (duration >= MIN_DURATION_MIN) & (df["trip_distance"] <= MAX_DISTANCE_MILES),
-                       f"Distance not between {MIN_DURATION_MIN} and {MAX_DURATION_MIN} MINUTES ")
+    #5. invalid time ranges
+    duration = (df["dropoff_datetime"] - df["pickup_datetime"]).dt.total_seconds() / 60
+    df = drop_rows(
+        df,
+        duration.between(MIN_DURATION_MIN, MAX_DURATION_MIN)
+        & df["trip_distance"].le(MAX_DISTANCE_MILES),
+        f"Duration not between {MIN_DURATION_MIN} and {MAX_DURATION_MIN} minutes",
+    )
 
-        #6. invalid distance and fares
-        df = drop_rows(df, (df["trip_distance"] > 0) & (df["trip_distance"] <= MAX_DISTANCE_MILES),
-                       f"Distance not between 0 and {MAX_DISTANCE_MILES} miles")
-        df = drop_rows(df, df["fare_amount"].between(MIN_FARE, MAX_FARE),
-                       f"Fare outside ${MIN_FARE}-${MAX_FARE}")
+    #6. invalid distance and fares
+    df = drop_rows(df, df["trip_distance"].between(0, MAX_DISTANCE_MILES, inclusive="neither"),
+                   f"Distance not between 0 and {MAX_DISTANCE_MILES} miles")
+    df = drop_rows(df, df["fare_amount"].between(MIN_FARE, MAX_FARE),
+                   f"Fare outside ${MIN_FARE}-${MAX_FARE}")
 
-        #7. zone IDs that do not exist in the lookup table
-        df = drop_rows(df, df["pickup_zone_id"].isin(valid_zone_ids)
-                       & df["dropoff_zone_id"].isin(valid_zone_ids),
-                       "pickup/dropoff zone not in zone lookup")
+    #7. zone IDs that do not exist in the lookup table
+    df = drop_rows(df, df["pickup_zone_id"].isin(valid_zone_ids)
+                   & df["dropoff_zone_id"].isin(valid_zone_ids),
+                   "pickup/dropoff zone not in zone lookup")
 
-        #8. passenger_count: invalid values become missing instead of dropping the trip
-        bad_pc = ~df["passenger_count"].between(1, 6) & df["passenger_count"].notna()
-        log(f"- passenger count outside 1-6: set to missing for {int(bad_pc.sum()):,} rows (rows kept)")
-        df.loc[~df["passenger_count"].between(1, 6), "passenger_count"] = pd.NA
+    #8. passenger_count: invalid values become missing instead of dropping the trip
+    bad_pc = ~df["passenger_count"].between(1, 6) & df["passenger_count"].notna()
+    log(f"- passenger count outside 1-6: set to missing for {int(bad_pc.sum()):,} rows (rows kept)")
+    df.loc[~df["passenger_count"].between(1, 6), "passenger_count"] = pd.NA
 
-        #9. derived features
-        df["trip_duration_min"] = (
-            (df["dropoff_datetime"] - df["pickup_datetime"]).dt.total_seconds() / 60
-        ).round(2)
-        df["avg_speed_mph"] = (df["trip_distance"] / (df["trip_duration_min"] / 60)).round(2)
-        df["cost_per_minute"] = (df["fare_amount"] / df["trip_duration_min"]).round(4)
+    #9. derived features
+    df["trip_duration_min"] = (
+        (df["dropoff_datetime"] - df["pickup_datetime"]).dt.total_seconds() / 60
+    ).round(2)
+    df["avg_speed_mph"] = (df["trip_distance"] / (df["trip_duration_min"] / 60)).round(2)
+    df["cost_per_minute"] = (df["fare_amount"] / df["trip_duration_min"]).round(4)
 
-        #10. impossible speeds (found only after the speed feature exists)
-        df = drop_rows(df, df["avg_speed_mph"] <= MAX_SPEED_MPH,
-                    f"Average speed above {MAX_SPEED_MPH} mph")
+    #10. impossible speeds (found only after the speed feature exists)
+    df = drop_rows(df, df["avg_speed_mph"] <= MAX_SPEED_MPH,
+                   f"Average speed above {MAX_SPEED_MPH} mph")
 
-        #11. final types and trip_id
-        df["pickup_zone_id"] = df["pickup_zone_id"].astype(int)
-        df["dropoff_zone_id"] = df["dropoff_zone_id"].astype(int)
-        df["passenger_count"] = df["passenger_count"].astype("Int64")
-        df = df.sort_values("pickup_datetime").reset_index(drop=True)
-        df.insert(0, "trip_id", df.index + 1)
-        return df
+    #11. final types and trip_id
+    df["pickup_zone_id"] = df["pickup_zone_id"].astype(int)
+    df["dropoff_zone_id"] = df["dropoff_zone_id"].astype(int)
+    df["passenger_count"] = df["passenger_count"].astype("Int64")
+    df = df.sort_values("pickup_datetime").reset_index(drop=True)
+    df.insert(0, "trip_id", df.index + 1)
+    return df
 
 
 def main():
@@ -279,8 +283,8 @@ def main():
     log("Derived features: trip_duration_min, avg_speed_mph, cost_per_minute")
 
     trips.to_csv(OUT_DIR / "trips_clean.csv", index=False)
-    zones.to_csv(OUT_DIR / "borough_clean.csv", index=False)
-    boroughs.to_csv(OUT_DIR / "borough_clean.csv", index=False)
+    zones.to_csv(OUT_DIR / "zones_clean.csv", index=False)
+    boroughs.to_csv(OUT_DIR / "boroughs_clean.csv", index=False)
     (OUT_DIR / "cleaning_log.txt").write_text("\n". join(log_lines), encoding="utf-8")
     if rejected_frames:
         rejected = pd.concat(rejected_frames, ignore_index=True)
@@ -289,5 +293,5 @@ def main():
     print(f"\nsaved files to {OUT_DIR}")
 
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()

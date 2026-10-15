@@ -22,6 +22,7 @@ def calculate_haversine_distance(lat1, lon1, lat2, lon2):
     dlon = lon2_rad - lon1_rad
     dlat = lat2_rad - lat1_rad
     a = sin(dlat / 2)**2 + cos(lat1_rad) * cos(lat2_rad) * sin(dlon / 2)**2
+    a = min(1.0, max(0.0, a))
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     
     # Radius of Earth in kilometers (mean radius)
